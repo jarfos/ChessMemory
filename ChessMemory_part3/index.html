@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChessMemory</title>
+    <style>
+        body {
+            background-color: lightblue;
+            font-family: verdana;
+            text-align: center;
+        }
+        @font-face
+            {font-family:chesspieces; src:url(chesspieces.ttf)}
+    </style>
+</head>
+<body>
+    <h2>ChessMemory</h2>
+    <table align="center">
+        <tr>
+            <td align="right">Licznik:</td><td width="60" align="left"><div id="dLicznik">0</div></td>
+            <td align="right">Figury: </td><td width="60" align="left"><div id="dFigury" >0</div></td>
+            <td align="right">Czas:   </td><td width="60" align="left"><div id="dStoper" >0</div></td>
+        </tr>
+    </table>
+    <svg version="1.1"
+        id="chessboard" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" height="500" width="500"
+        style="enable-background:new 0 0 500 500;" xml:space="preserve">
+    <style type="text/css">
+        .st0{fill:#FFDD88;}
+        .st1{fill:#883300;}
+        .st2{font-family:'Helvetica';}
+        .st3{font-size:30px;}
+        .st4{font-family:'chesspieces';text-align:center;text-anchor:middle;}
+        .st5{font-size:40px;}
+        .st6{fill:#00DD00;fill-opacity:0;stroke:#00DD00;stroke-width:4;stroke-opacity:0;}
+    </style>
+    <rect id="whites" x="50" y="50" class="st0" width="400" height="400"/>
+    <path id="blacks" class="st1" d="M350,100h50v50h-50V100z M400,50h50v50h-50V50z M250,100h50v50h-50V100z M300,50h50v50h-50V50z
+        M150,100h50v50h-50V100z M200,50h50v50h-50V50z M50,100h50v50H50V100z M100,50h50v50h-50V50z M350,200h50v50h-50V200z M400,150h50
+        v50h-50V150z M250,200h50v50h-50V200z M300,150h50v50h-50V150z M150,200h50v50h-50V200z M200,150h50v50h-50V150z M50,200h50v50H50
+        V200z M100,150h50v50h-50V150z M350,300h50v50h-50V300z M400,250h50v50h-50V250z M250,300h50v50h-50V300z M300,250h50v50h-50V250z
+        M150,300h50v50h-50V300z M200,250h50v50h-50V250z M50,300h50v50H50V300z M100,250h50v50h-50V250z M350,400h50v50h-50V400z M400,350
+        h50v50h-50V350z M250,400h50v50h-50V400z M300,350h50v50h-50V350z M150,400h50v50h-50V400z M200,350h50v50h-50V350z M50,400h50v50
+        H50V400z M100,350h50v50h-50V350z"/>
+    <g id="coordinates" transform="translate(-1397,1754)">
+        <text transform="matrix(1 0 0 1 1462 -1718)" class="st2 st3">A</text>
+        <text transform="matrix(1 0 0 1 1511 -1718)" class="st2 st3">B</text>
+        <text transform="matrix(1 0 0 1 1561 -1718)" class="st2 st3">C</text>
+        <text transform="matrix(1 0 0 1 1611 -1718)" class="st2 st3">D</text>
+        <text transform="matrix(1 0 0 1 1661 -1718)" class="st2 st3">E</text>
+        <text transform="matrix(1 0 0 1 1711 -1718)" class="st2 st3">F</text>
+        <text transform="matrix(1 0 0 1 1761 -1718)" class="st2 st3">G</text>
+        <text transform="matrix(1 0 0 1 1811 -1718)" class="st2 st3">H</text>
+        <text transform="matrix(1 0 0 1 1462 -1268)" class="st2 st3">A</text>
+        <text transform="matrix(1 0 0 1 1511 -1268)" class="st2 st3">B</text>
+        <text transform="matrix(1 0 0 1 1561 -1268)" class="st2 st3">C</text>
+        <text transform="matrix(1 0 0 1 1611 -1268)" class="st2 st3">D</text>
+        <text transform="matrix(1 0 0 1 1661 -1268)" class="st2 st3">E</text>
+        <text transform="matrix(1 0 0 1 1711 -1268)" class="st2 st3">F</text>
+        <text transform="matrix(1 0 0 1 1761 -1268)" class="st2 st3">G</text>
+        <text transform="matrix(1 0 0 1 1811 -1268)" class="st2 st3">H</text>
+        <text transform="matrix(1 0 0 1 1413 -1318)" class="st2 st3">1</text>
+        <text transform="matrix(1 0 0 1 1414 -1368)" class="st2 st3">2</text>
+        <text transform="matrix(1 0 0 1 1414 -1418)" class="st2 st3">3</text>
+        <text transform="matrix(1 0 0 1 1414 -1468)" class="st2 st3">4</text>
+        <text transform="matrix(1 0 0 1 1414 -1518)" class="st2 st3">5</text>
+        <text transform="matrix(1 0 0 1 1414 -1568)" class="st2 st3">6</text>
+        <text transform="matrix(1 0 0 1 1414 -1618)" class="st2 st3">7</text>
+        <text transform="matrix(1 0 0 1 1414 -1668)" class="st2 st3">8</text>
+        <text transform="matrix(1 0 0 1 1863 -1318)" class="st2 st3">1</text>
+        <text transform="matrix(1 0 0 1 1864 -1368)" class="st2 st3">2</text>
+        <text transform="matrix(1 0 0 1 1864 -1418)" class="st2 st3">3</text>
+        <text transform="matrix(1 0 0 1 1864 -1468)" class="st2 st3">4</text>
+        <text transform="matrix(1 0 0 1 1864 -1518)" class="st2 st3">5</text>
+        <text transform="matrix(1 0 0 1 1864 -1568)" class="st2 st3">6</text>
+        <text transform="matrix(1 0 0 1 1864 -1618)" class="st2 st3">7</text>
+        <text transform="matrix(1 0 0 1 1864 -1668)" class="st2 st3">8</text>
+    </g>
+    <g id="pieces">
+        <text id="tA1" transform="matrix(1 0 0 1 75 443)" class="st4 st5">h</text>
+        <text id="tA2" transform="matrix(1 0 0 1 75 393)" class="st4 st5">h</text>
+        <text id="tA3" transform="matrix(1 0 0 1 75 343)" class="st4 st5">h</text>
+        <text id="tA4" transform="matrix(1 0 0 1 75 293)" class="st4 st5">h</text>
+        <text id="tA5" transform="matrix(1 0 0 1 75 243)" class="st4 st5">h</text>
+        <text id="tA6" transform="matrix(1 0 0 1 75 193)" class="st4 st5">h</text>
+        <text id="tA7" transform="matrix(1 0 0 1 75 143)" class="st4 st5">h</text>
+        <text id="tA8" transform="matrix(1 0 0 1 75 93)" class="st4 st5">h</text>
+        <text id="tB1" transform="matrix(1 0 0 1 125 443)" class="st4 st5">h</text>
+        <text id="tB2" transform="matrix(1 0 0 1 125 393)" class="st4 st5">h</text>
+        <text id="tB3" transform="matrix(1 0 0 1 125 343)" class="st4 st5">h</text>
+        <text id="tB4" transform="matrix(1 0 0 1 125 293)" class="st4 st5">h</text>
+        <text id="tB5" transform="matrix(1 0 0 1 125 243)" class="st4 st5">h</text>
+        <text id="tB6" transform="matrix(1 0 0 1 125 193)" class="st4 st5">h</text>
+        <text id="tB7" transform="matrix(1 0 0 1 125 143)" class="st4 st5">h</text>
+        <text id="tB8" transform="matrix(1 0 0 1 125 93)" class="st4 st5">h</text>
+        <text id="tC1" transform="matrix(1 0 0 1 175 443)" class="st4 st5">h</text>
+        <text id="tC2" transform="matrix(1 0 0 1 175 393)" class="st4 st5">h</text>
+        <text id="tC3" transform="matrix(1 0 0 1 175 343)" class="st4 st5">h</text>
+        <text id="tC4" transform="matrix(1 0 0 1 175 293)" class="st4 st5">h</text>
+        <text id="tC5" transform="matrix(1 0 0 1 175 243)" class="st4 st5">h</text>
+        <text id="tC6" transform="matrix(1 0 0 1 175 193)" class="st4 st5">h</text>
+        <text id="tC7" transform="matrix(1 0 0 1 175 143)" class="st4 st5">h</text>
+        <text id="tC8" transform="matrix(1 0 0 1 175 93)" class="st4 st5">h</text>
+        <text id="tD1" transform="matrix(1 0 0 1 225 443)" class="st4 st5">h</text>
+        <text id="tD2" transform="matrix(1 0 0 1 225 393)" class="st4 st5">h</text>
+        <text id="tD3" transform="matrix(1 0 0 1 225 343)" class="st4 st5">h</text>
+        <text id="tD4" transform="matrix(1 0 0 1 225 293)" class="st4 st5">h</text>
+        <text id="tD5" transform="matrix(1 0 0 1 225 243)" class="st4 st5">h</text>
+        <text id="tD6" transform="matrix(1 0 0 1 225 193)" class="st4 st5">h</text>
+        <text id="tD7" transform="matrix(1 0 0 1 225 143)" class="st4 st5">h</text>
+        <text id="tD8" transform="matrix(1 0 0 1 225 93)" class="st4 st5">h</text>
+        <text id="tE1" transform="matrix(1 0 0 1 275 443)" class="st4 st5">h</text>
+        <text id="tE2" transform="matrix(1 0 0 1 275 393)" class="st4 st5">h</text>
+        <text id="tE3" transform="matrix(1 0 0 1 275 343)" class="st4 st5">h</text>
+        <text id="tE4" transform="matrix(1 0 0 1 275 293)" class="st4 st5">h</text>
+        <text id="tE5" transform="matrix(1 0 0 1 275 243)" class="st4 st5">h</text>
+        <text id="tE6" transform="matrix(1 0 0 1 275 193)" class="st4 st5">h</text>
+        <text id="tE7" transform="matrix(1 0 0 1 275 143)" class="st4 st5">h</text>
+        <text id="tE8" transform="matrix(1 0 0 1 275 93)" class="st4 st5">h</text>
+        <text id="tF1" transform="matrix(1 0 0 1 325 443)" class="st4 st5">h</text>
+        <text id="tF2" transform="matrix(1 0 0 1 325 393)" class="st4 st5">h</text>
+        <text id="tF3" transform="matrix(1 0 0 1 325 343)" class="st4 st5">h</text>
+        <text id="tF4" transform="matrix(1 0 0 1 325 293)" class="st4 st5">h</text>
+        <text id="tF5" transform="matrix(1 0 0 1 325 243)" class="st4 st5">h</text>
+        <text id="tF6" transform="matrix(1 0 0 1 325 193)" class="st4 st5">h</text>
+        <text id="tF7" transform="matrix(1 0 0 1 325 143)" class="st4 st5">h</text>
+        <text id="tF8" transform="matrix(1 0 0 1 325 93)" class="st4 st5">h</text>
+        <text id="tG1" transform="matrix(1 0 0 1 375 443)" class="st4 st5">h</text>
+        <text id="tG2" transform="matrix(1 0 0 1 375 393)" class="st4 st5">h</text>
+        <text id="tG3" transform="matrix(1 0 0 1 375 343)" class="st4 st5">h</text>
+        <text id="tG4" transform="matrix(1 0 0 1 375 293)" class="st4 st5">h</text>
+        <text id="tG5" transform="matrix(1 0 0 1 375 243)" class="st4 st5">h</text>
+        <text id="tG6" transform="matrix(1 0 0 1 375 193)" class="st4 st5">h</text>
+        <text id="tG7" transform="matrix(1 0 0 1 375 143)" class="st4 st5">h</text>
+        <text id="tG8" transform="matrix(1 0 0 1 375 93)" class="st4 st5">h</text>
+        <text id="tH1" transform="matrix(1 0 0 1 425 443)" class="st4 st5">h</text>
+        <text id="tH2" transform="matrix(1 0 0 1 425 393)" class="st4 st5">h</text>
+        <text id="tH3" transform="matrix(1 0 0 1 425 343)" class="st4 st5">h</text>
+        <text id="tH4" transform="matrix(1 0 0 1 425 293)" class="st4 st5">h</text>
+        <text id="tH5" transform="matrix(1 0 0 1 425 243)" class="st4 st5">h</text>
+        <text id="tH6" transform="matrix(1 0 0 1 425 193)" class="st4 st5">h</text>
+        <text id="tH7" transform="matrix(1 0 0 1 425 143)" class="st4 st5">h</text>
+        <text id="tH8" transform="matrix(1 0 0 1 425 93)" class="st4 st5">h</text>
+    </g>
+    <g id="fields" transform="translate(-1397.2494,1753.7001)">
+        <rect id="rA1" x="1447.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rA2" x="1447.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rA3" x="1447.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rA4" x="1447.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rA5" x="1447.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rA6" x="1447.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rA7" x="1447.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rA8" x="1447.2" y="-1703.7" class="st6" width="50" height="50"/>
+        <rect id="rB1" x="1497.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rB2" x="1497.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rB3" x="1497.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rB4" x="1497.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rB5" x="1497.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rB6" x="1497.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rB7" x="1497.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rB8" x="1497.2" y="-1703.7" class="st6" width="50" height="50"/>
+        <rect id="rC1" x="1547.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rC2" x="1547.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rC3" x="1547.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rC4" x="1547.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rC5" x="1547.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rC6" x="1547.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rC7" x="1547.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rC8" x="1547.2" y="-1703.7" class="st6" width="50" height="50"/>
+        <rect id="rD1" x="1597.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rD2" x="1597.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rD3" x="1597.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rD4" x="1597.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rD5" x="1597.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rD6" x="1597.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rD7" x="1597.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rD8" x="1597.2" y="-1703.7" class="st6" width="50" height="50"/>
+        <rect id="rE1" x="1647.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rE2" x="1647.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rE3" x="1647.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rE4" x="1647.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rE5" x="1647.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rE6" x="1647.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rE7" x="1647.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rE8" x="1647.2" y="-1703.7" class="st6" width="50" height="50"/>
+        <rect id="rF1" x="1697.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rF2" x="1697.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rF3" x="1697.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rF4" x="1697.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rF5" x="1697.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rF6" x="1697.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rF7" x="1697.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rF8" x="1697.2" y="-1703.7" class="st6" width="50" height="50"/>
+        <rect id="rG1" x="1747.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rG2" x="1747.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rG3" x="1747.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rG4" x="1747.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rG5" x="1747.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rG6" x="1747.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rG7" x="1747.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rG8" x="1747.2" y="-1703.7" class="st6" width="50" height="50"/>
+        <rect id="rH1" x="1797.2" y="-1353.7" class="st6" width="50" height="50"/>
+        <rect id="rH2" x="1797.2" y="-1403.7" class="st6" width="50" height="50"/>
+        <rect id="rH3" x="1797.2" y="-1453.7" class="st6" width="50" height="50"/>
+        <rect id="rH4" x="1797.2" y="-1503.7" class="st6" width="50" height="50"/>
+        <rect id="rH5" x="1797.2" y="-1553.7" class="st6" width="50" height="50"/>
+        <rect id="rH6" x="1797.2" y="-1603.7" class="st6" width="50" height="50"/>
+        <rect id="rH7" x="1797.2" y="-1653.7" class="st6" width="50" height="50"/>
+        <rect id="rH8" x="1797.2" y="-1703.7" class="st6" width="50" height="50"/>
+    </g>
+    </svg>
+    <script src="bicia.js"></script>
+    <script src="app.js"></script>
+    <script>
+        var gra = new Gra();
+        gra.init(gra.losuj());
+    </script>
+</body>
+</html>
