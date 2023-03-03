@@ -45,32 +45,23 @@ Zostawiamy na razie plik [chessmemory.svg](https://github.com/jarfos/ChessMemory
 | Następnie, w zakładce Glify dodajemy nowy znak (glif), uzupełniamy odpowiadający tekst, wpisując literkę „s”, na koniec wciskamy klawisz Pobierz ścieżki z zaznaczonych obiektów… Oczywiście w tym czasie musi być zaznaczona ścieżka naszego skoczka. Na dole możemy podejrzeć jak się prezentuje nowo utworzony znak, wypróbowując go w polu Podgląd tekstu. | ![Zrzut ekranu 2017-04-10 o 12 24 35](https://user-images.githubusercontent.com/16913527/222800269-0c480818-7446-4c80-bf25-9a63f3f675fd.png) |
 | W ten sam sposób postępujemy z pozostałymi figurami, pamiętając, aby w chwili utworzenia nowego glifu każda z nich miała jednakową wysokość (1024 piksele) oraz była wyśrodkowana względem strony w pionie i poziomie. Figurę wieży przypisujemy literce „w”, hetmana literce „h”, a gońca przypisujemy literce „g”. | ![Zrzut ekranu 2017-04-10 o 12 37 07](https://user-images.githubusercontent.com/16913527/222800467-369a4a75-0f95-4ea9-96bf-3a28aecffa2b.png) |
 
-
-
 Gotowe. Tak przygotowany plik posiada definicję czcionki, którą następnie możemy skonwertować do pliku TTF, czyli czcionki TrueType. Ja w tym celu używam darmowego narzędzia OnlineFontConverter, dostępnego pod adresem https://onlinefontconverter.com/. Wystarczy wskazać plik SVG, oraz wybrać docelowy format, czyli w naszym przypadku ttf, a po konwersji możemy ją ściągnąć i zapisać na dysku. Tak przygotowaną czcionkę możemy zainstalować w systemie i używać w różnych programach. Teraz możemy dokończyć pracę nad szachownicą…
 
-Ułożenie figur na szachownicy
-Wracamy z powrotem do pliku chessmemory.svg. Szachownica jest gotowa, ale nie ma jeszcze na niej żadnych figur. Dlatego na każdym polu musimy utworzyć obiekt typu tekstowego, w którym pojawi się jakaś figura szachowa. Na początku wstawimy do niego hetmana, który jest najszerszy i najlepiej się go wyrównuje. Tworzymy obiekt tekstowy, który zawiera jedną literkę „h”, wyświetloną za pomocą nowo utworzonej czcionki. Rozmiar tekstu ustawiamy na 32 oraz wyrównanie do środka.
-
-
-Żeby mieć pewność, że figura będzie równo ułożona względem pola A8, w edytorze XML odnajdujemy obiekt typu Rectangle o nazwie rA8. Z przytrzymanym shiftem zaznaczamy naszego hetmana. Następnie w panelu Wyrównaj i rozmieść (Shift+Ctrl+A) wyrównujemy obydwa obiekty względem największego w pionie i poziomie.
-
-
-Następnie zaznaczamy samego hetmana i robimy jego duplikat (Ctrl+D). Wyrównujemy go analogicznie, względem obiektu rH8. Jeszcze sześć duplikatów i mamy pierwszą linię. Pierwszy i ostatni hetman są już na swoich pozycjach.
-
-
-Pozostałe figury wyrównujemy w następujący sposób: zaznaczamy wszystkie 8 hetmanów w taki sposób, aby ostatnim zaznaczonym elementem był hetman z pola A8 lub H8. Można to uzyskać zaznaczając całą grupę, a następnie z wciśniętym klawiszem (Shift) odznaczyć ostatnią figurę i z powrotem ją zaznaczyć. Następnie wyrównujemy dolne krawędzie wszystkich zaznaczonych obiektów względem ostatniego zaznaczonego, po czym rozmieszczamy je równomiernie przy pomocy opcji Rozmieść środki obiektów w równych odstępach w poziomie.
-
-
-Duplikujemy całą linię i przenosimy nowo utworzoną grupę do wiersza 7. Jeśli to zrobimy z wciśniętym klawiszem (Ctrl), wyrównanie w pionie będzie zachowane. W poziomie natomiast wystarczy, że zaznaczamy obiekt rA7, następnie z wciśniętym klawiszem (Shift) zaznaczymy wszystkie hetmany z linii 7. Na tak przygotowanym zestawie robimy wyrównanie środków obiektów w poziomie względem pierwszego zaznaczonego (czyli kwadratu). W podobny sposób wypełniamy pozostałe linie, aż zapełni się cała szachownica.
-
+## Ułożenie figur na szachownicy
+  
+Wracamy z powrotem do pliku [chessmemory.svg](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part1/chessmemory.svg). Szachownica jest gotowa, ale nie ma jeszcze na niej żadnych figur. Dlatego na każdym polu musimy utworzyć obiekt typu tekstowego, w którym pojawi się jakaś figura szachowa. Na początku wstawimy do niego hetmana, który jest najszerszy i najlepiej się go wyrównuje.
+  
+| Opis | Wygląd |
+| --- | --- |
+| Tworzymy obiekt tekstowy, który zawiera jedną literkę „h”, wyświetloną za pomocą nowo utworzonej czcionki. Rozmiar tekstu ustawiamy na 32 oraz wyrównanie do środka. | ![Zrzut ekranu 2017-04-10 o 13 49 18](https://user-images.githubusercontent.com/16913527/222825977-44497469-0ce6-40dc-be0a-256997bb16c2.png) |
+| Żeby mieć pewność, że figura będzie równo ułożona względem pola A8, w edytorze XML odnajdujemy obiekt typu Rectangle o nazwie rA8. Z przytrzymanym shiftem zaznaczamy naszego hetmana. Następnie w panelu Wyrównaj i rozmieść (Shift+Ctrl+A) wyrównujemy obydwa obiekty względem największego w pionie i poziomie. | ![Zrzut ekranu 2017-04-10 o 13 44 33](https://user-images.githubusercontent.com/16913527/222826180-691e0f55-d75a-47a6-a212-bf4fcbb7a43a.png) |
+| Następnie zaznaczamy samego hetmana i robimy jego duplikat (Ctrl+D). Wyrównujemy go analogicznie, względem obiektu rH8. Jeszcze sześć duplikatów i mamy pierwszą linię. Pierwszy i ostatni hetman są już na swoich pozycjach. | ![Zrzut ekranu 2017-04-10 o 13 59 09](https://user-images.githubusercontent.com/16913527/222826299-557296a0-b02b-4516-a4f9-ce20f7418981.png) |
+| Pozostałe figury wyrównujemy w następujący sposób: zaznaczamy wszystkie 8 hetmanów w taki sposób, aby ostatnim zaznaczonym elementem był hetman z pola A8 lub H8. Można to uzyskać zaznaczając całą grupę, a następnie z wciśniętym klawiszem (Shift) odznaczyć ostatnią figurę i z powrotem ją zaznaczyć. Następnie wyrównujemy dolne krawędzie wszystkich zaznaczonych obiektów względem ostatniego zaznaczonego, po czym rozmieszczamy je równomiernie przy pomocy opcji Rozmieść środki obiektów w równych odstępach w poziomie. | ![Zrzut ekranu 2017-04-10 o 14 08 22](https://user-images.githubusercontent.com/16913527/222826458-898896a1-fa7f-4f03-8843-f34bfd1acc0e.png) |
+| Duplikujemy całą linię i przenosimy nowo utworzoną grupę do wiersza 7. Jeśli to zrobimy z wciśniętym klawiszem (Ctrl), wyrównanie w pionie będzie zachowane. W poziomie natomiast wystarczy, że zaznaczamy obiekt rA7, następnie z wciśniętym klawiszem (Shift) zaznaczymy wszystkie hetmany z linii 7. Na tak przygotowanym zestawie robimy wyrównanie środków obiektów w poziomie względem pierwszego zaznaczonego (czyli kwadratu). W podobny sposób wypełniamy pozostałe linie, aż zapełni się cała szachownica. | ![Zrzut ekranu 2017-04-10 o 14 38 25](https://user-images.githubusercontent.com/16913527/222826706-15287f82-8365-4167-b98f-16e1a100074e.png) |
 
 W kolejnym kroku znowu czeka nas nieco żmudnej pracy, ponieważ musimy zmienić nazwy wszystkich 64 obiektów tekstowych, w których znajdują się nasze figury. Podobnie jak w przypadku nazw pól szachownicy (rA1-rH8), nazwy obiektów tekstowych wypełniamy w edytorze XML, stosując analogiczny schemat (tA1-tH8).
 
 Ostatnią czynnością jest ukrycie wszystkich widocznych figur, czyli ustawienie parametru Opacity (%) na 0. W ten sposób nasza szachownica zawsze inicjalnie będzie wyświetlać się jako pusta. Można jeszcze utworzyć grupę zawierającą wszystkie figury dla przejrzystości pliku SVG.
 
 W tej części to wszystko.
-
-Obydwa pliki SVG z dzisiejszego artykułu oraz wynikowy plik TTF dostępne są w repozytorium Github.
-
-Zapraszam do lektury kolejnego artykułu, w którym nareszcie zajmiemy się programowaniem 🙂
+Zapraszam do lektury [kolejnej części](https://github.com/jarfos/ChessMemory/tree/main/ChessMemory_part2), w której nareszcie zajmiemy się programowaniem 🙂
