@@ -1,4 +1,4 @@
-Pierwsza część z cyklu ChessMemory - utworzenie czcionki z figurami szachowymi.
+[ChessMemory](https://jarfos.github.io/ChessMemory/) - [Napiszmy prostą grę planszową...](https://github.com/jarfos/ChessMemory)
 
 # Część I – Szachownica i figury
 ## Wstęp
