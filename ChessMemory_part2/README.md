@@ -1,11 +1,10 @@
-Druga część z cyklu ChessMemory - obsługa gry ze znanym początkowym ustawieniem figur na szachownicy.
+[ChessMemory](https://jarfos.github.io/ChessMemory/) - [Napiszmy prostą grę planszową...](https://github.com/jarfos/ChessMemory)
 # Część II – Mechanizm gry
 
-W pierwszej części utworzyliśmy plik ```chessmemory.svg``` zawierający szachownicę gotową do wykorzystania w naszej grze oraz plik ```chesspieces.ttf``` z czcionką składającą się z utworzonych przez nas figur szachowych. Opisaliśmy również zasady gry oraz sposób, w jaki zamierzamy wyświetlać poszczególne figury i zaznaczać pola na szachownicy. W drugiej części zajmiemy się napisaniem prostego programu, który obsłuży grę ChessMemory.
+W [pierwszej części](https://github.com/jarfos/ChessMemory/tree/main/ChessMemory_part1) powstał plik [chessmemory.svg](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part1/chessmemory.svg) zawierający szachownicę gotową do wykorzystania w naszej grze oraz plik [chesspieces.ttf](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part1/chesspieces.ttf) z czcionką składającą się z utworzonych przez nas figur szachowych. Opisany został również sposób, w jaki będą wyświetlane poszczególne figury i "podświetlane" pola na szachownicy. W drugiej części zajmiemy się napisaniem prostego programu, który obsłuży grę [ChessMemory](https://jarfos.github.io/ChessMemory/).
 
 ## Osadzenie szachownicy w pliku HTML
 Do wyświetlenia pliku SVG w przeglądarce nie potrzeba żadnych dodatkowych pluginów czy aplikacji. Wszystkie przeglądarki obecnie radzą sobie doskonale z tego typu grafiką. Można to zrobić na dwa sposoby:
-
 * umieścić grafikę jako obrazek wewnątrz znacznika ```<img>``` ze źródłem w pliku zewnętrznym – taki sposób ma tę wadę, że plik SVG jest traktowany jak każdy inny statyczny obrazek i poza rozmiarem, ramką i kilkoma innymi parametrami, nie mamy większego wpływu na jego zawartość;
 * umieścić grafikę wewnątrz znaczników ```<svg>``` – w ten sposób zapewniamy sobie dostęp do elementów w obrębie obiektu ```SVG```, ponieważ staje się on częścią składową struktury dokumentu ```HTML```.
 
@@ -51,143 +50,84 @@ Tworzymy zatem nowy plik: [index.html](https://github.com/jarfos/ChessMemory/blo
 
 W miejscu kropek oczywiście znajduje się pozostała zawartość obiektu ```SVG```. Pominąłem ją ze względu na czytelność powyższego przykładu. Jak widać, dodałem też tytuł strony, podstawowy styl (czcionka, kolor tła, wyrównanie) oraz nagłówek. 
 
-Bardzo ważne jest też wskazanie na plik czcionki [chesspieces.ttf](https://github.com/jarfos/ChessMemory/blob/jarfos-github-only/ChessMemory_part1/chesspieces.svg), bez którego nasza gra będzie wyświetlać litery: „h”, „w”, „s” i „g”, zamiast prawidłowych figur szachowych. Chyba, że naszą czcionkę wcześniej zainstalowaliśmy w systemie – co nie zmienia faktu, że gra wyświetlałaby się prawidłowo tylko na tym komputerze, na którym ją zainstalowano. Uruchomienie pliku index.html w przeglądarce powinno zakończyć się takim widokiem:
+Bardzo ważne jest też wskazanie na plik czcionki [chesspieces.ttf](https://github.com/jarfos/ChessMemory/blob/jarfos-github-only/ChessMemory_part1/chesspieces.svg), bez którego nasza gra będzie wyświetlać litery: „h”, „w”, „s” i „g”, zamiast prawidłowych figur szachowych.
 
+Warto zauważyć, że plik [chessmemory.svg](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part1/chessmemory.svg) nie jest zoptymalizowany pod względem objętości. Na przykład program Inkscape dodaje do pliku SVG trochę nadmiarowych informacji, zawierających ustawienia własne, których nie potrzebujemy. W tym artykule nie będziemy się zajmować optymalizacją plików SVG, wspomnę tylko, że istnieje co najmniej kilka sposobów na ich „odchudzenie”, takich jak:
 
-Warto zauważyć, że plik chessmemory.svg nie jest zoptymalizowany pod względem objętości. Na przykład program Inkscape dodaje do pliku SVG trochę nadmiarowych informacji, zawierających ustawienia własne, których nie potrzebujemy. W tym artykule nie będziemy się zajmować optymalizacją plików SVG, wspomnę tylko, że istnieje co najmniej kilka sposobów na ich „odchudzenie”, takich jak:
+* usunięcie zbędnych węzłów (musimy jednak poznać ich przeznaczenie i mieć pewność, że są rzeczywiście zbędne);
+* zaokrąglenie liczb do pełnych jedności – Inkscape domyślnie określa wszystkie współrzędne z dokładnością do 4 miejsc po przecinku, w niektórych programach dokładność dochodzi nawet do 7 miejsc po przecinku; w praktyce, jeśli posługujemy się jednostką piksela (px), często pominięcie ułamków gwarantuje wystarczającą dokładność;
+* usunięcie wszystkich „białych znaków”, czyli spacji, tabulacji, znaczników końca linii itp.
 
-usunięcie zbędnych węzłów (musimy jednak poznać ich przeznaczenie i mieć pewność, że są rzeczywiście zbędne);
-zaokrąglenie liczb do pełnych jedności – Inkscape domyślnie określa wszystkie współrzędne z dokładnością do 4 miejsc po przecinku, w niektórych programach dokładność dochodzi nawet do 7 miejsc po przecinku; w praktyce, jeśli posługujemy się jednostką piksela (px), często pominięcie ułamków gwarantuje wystarczającą dokładność;
-usunięcie wszystkich „białych znaków”, czyli spacji, tabulacji, znaczników końca linii itp.
-Można też posłużyć się jednym z wielu dostępnych narzędzi optymalizacyjnych, które łatwo znaleźć w sieci. W naszym przypadku plik SVG zajmuje ok. 100kB, co nie powinno stanowić żadnego problemu przy obecnych transferach. Jeśli jednak kogoś interesuje optymalizacja kodu, zachęcam do zapoznania się z zagadnieniem minifikacji (https://pl.wikipedia.org/wiki/Minifikacja).
+Można też posłużyć się jednym z wielu dostępnych narzędzi optymalizacyjnych, które łatwo znaleźć w sieci. W naszym przypadku plik SVG zajmuje ok. 100kB, co nie powinno stanowić żadnego problemu przy obecnych transferach. Jeśli jednak kogoś interesuje optymalizacja kodu, zachęcam do zapoznania się z zagadnieniem [minifikacji](https://pl.wikipedia.org/wiki/Minifikacja).
 
-Rozstawianie figur na szachownicy
-W kolejnym kroku zajmiemy się rozstawieniem wszystkich figur na szachownicy, pamiętając o zasadach gry, opisanych w pierwszej części artykułu. Sposobów na ustawienie początkowe z pewnością jest wiele. Tutaj wykorzystamy jedno z możliwych ustawień, które symbolicznie zapisać można jako następujący ciąg znaków: 
+## Rozstawianie figur na szachownicy
+W kolejnym kroku zajmiemy się rozstawieniem wszystkich figur na szachownicy, pamiętając o zasadach gry, opisanych we [wprowadzeniu](https://github.com/jarfos/ChessMemory). Sposobów na ustawienie początkowe z pewnością jest wiele. Tutaj wykorzystamy jedno z możliwych ustawień, które symbolicznie zapisać można jako następujący ciąg znaków: 
 
+```
 HHSgwWsh_SgGHHWwh_WWshGsHH_sgwSgwhW_gwHGgghg_hSSswSsW_GGGWWhwG_SwsGhHSs
-Ciąg wydaje się być skomplikowany, ale w rzeczywistości łatwo go odszyfrować. Każda litera odpowiada jednej figurze: (h)etman, (s)koczek, (w)ieża, (g)oniec. Wielkie litery odpowiadają figurom białym, małe natomiast oznaczają kolor czarny. Dodatkowo, ciąg jest podzielony na 8 części po 8 znaków, co odpowiada liczbie kolumn i rzędów szachownicy.
+```
 
-Poniższy fragment pokazuje część kodu, którą należy wstawić pomiędzy znacznikami: końca obiektu SVG (</svg>) oraz końca zawartości strony (</body>):
+Powyższy ciąg łatwo odszyfrować. Każda litera odpowiada jednej figurze: `h`etman, `s`koczek, `w`ieża, `g`oniec. Wielkie litery odpowiadają figurom białym, małe natomiast oznaczają kolor czarny. Dodatkowo, ciąg jest podzielony na 8 części po 8 znaków, co odpowiada liczbie kolumn i rzędów szachownicy.
 
-<script scr="app.js"></script>
-<script>
-var gra = new Gra();
-gra.init('HHSgwWsh_SgGHHWwh_WWshGsHH_sgwSgwhW_gwHGgghg_hSSswSsW_GGGWWhwG_SwsGhHSs');
-</script>
-W pierwszej linijce znajduje się odnośnik do zewnętrznego pliku app.js, w którym będzie się znajdować cały kod obsługi gry. Umieścimy tam konstruktor obiektu Gra(), który w powyższym fragmencie jest wywoływany (na jego podstawie, przy pomocy polecenia new, tworzymy zmienną obiektową gra). Następnie wywołana zostaje metoda gra.init(), czyli w praktyce funkcja znajdująca się wewnątrz obiektu gra. Definicję tej funkcji za chwilę również umieścimy w pliku app.js. Pozostaje zatem przejść do nowego pliku app.js i uzupełnić brakujący kod:
+Poniższy fragment pokazuje część kodu, którą znajdziemy pomiędzy znacznikami końca obiektu SVG (`</svg>`) i końca zawartości strony (`</body>`):
 
-// konstruktor obiektu 'komorka'
-function Komorka(id) {
-    this.id = id;       // identyfikator (wspolrzedne)
-    this.t;             // element tXY z szachownicy (wewnatrz pliku SVG)
-    this.r;             // element rXY z szachownicy
-    this.figura = '';   // wartość figury (jedna z liter: 'HWSGhwsg')
-    this.show = 0;      // czy pokazujemy zawartość komórki
-}
+```html
+    <script src="app.js"></script>
+    <script>
+        var gra = new Gra();
+        gra.init('HHSgwWsh_SgGHHWwh_WWshGsHH_sgwSgwhW_gwHGgghg_hSSswSsW_GGGWWhwG_SwsGhHSs');
+    </script>
+```
 
-// ustawianie figury na polu szachownicy
-Komorka.prototype.ustaw = function(wartosc) {
-    
-    if (-1 === 'HWSGhwsg'.indexOf(wartosc)) throw('Nieprawidlowa figura!');
-    
-    // przypisanie wartości figury
-    this.figura = wartosc;
-    this.t.innerHTML = wartosc.toLowerCase();
+W pierwszej linijce znajduje się odnośnik do zewnętrznego pliku [app.js](https://github.com/jarfos/ChessMemory/blob/main/app.js), w którym znajduje się cała obsługa gry. Znajdziemy tam konstruktor obiektu `Gra()`, który w powyższym fragmencie jest wywoływany (na jego podstawie, przy pomocy polecenia `new`, tworzymy zmienną obiektową `gra`). Następnie wywołana zostaje metoda `gra.init()`, czyli w praktyce funkcja znajdująca się wewnątrz obiektu `gra`.
 
-    // jeśli wartością jest wielka litera, to ustawiamy kolor biały
-    if (0 <= 'HWGS'.indexOf(wartosc)) {
-        this.t.style.fill = '#fff';
-    } else {
-        this.t.style.fill = '#000';
-    }
-}
+Plik [app.js](https://github.com/jarfos/ChessMemory/blob/main/app.js) w tej części zawiera pięć funkcji, z czego dwie są konstruktorami (`Komorka()` i `Gra()`), a trzy pozostałe są metodami obiektu komorka (`ustaw()`, `pokaz_figure()`, oraz `pokaz_podswietlenie()`). Przyjęło się, że funkcje będące konstruktorem oznaczamy wielką literą, aby odróżnić je od innych funkcji. Funkcję będącą konstruktorem obiektu można bowiem wywołać tak samo, jak każdą inną funkcję i nie jest to błędem. Różnica pojawia się dopiero wtedy, gdy przy wywołaniu funkcji użyjemy operatora `new` – wtedy funkcja ta zwróci nam zmienną obiektową.
 
-// zaznaczanie i ukrywanie figury (ustawianie widoczności pola tekstowego)
-Komorka.prototype.pokaz_figure = function(widocznosc) {
-    this.t.style.opacity = widocznosc;
-    this.show = widocznosc;
-}
+Inicjalnie tworzymy obiekt `gra`, który zawiera metodę `init()`. To właśnie tę metodę wywołujemy jednorazowo, przekazując na wejściu ciąg znaków z zakodowanym rozstawieniem figur. Wewnątrz tej metody znajdziemy dwie pętle (jedną zagnieżdżoną w drugiej), w których kolumna po kolumnie, wiersz po wierszu, wykonujemy kolejno kilka czynności:
+* Ustalamy współrzędne aktualnej komórki i przypisujemy je do zmiennej `XY`. Pomagają nam w tym zmienne `cols` i `rows`. Zauważmy, że wszystkie trzy zmienne należą do właściwości obiektu `gra`.
+* Tworzymy instancję obiektu o nazwie zawierającej ustalone wcześniej współrzędne. W tym celu korzystamy z konstruktora `Komorka()`, zdefiniowanego wyżej w tym samym pliku. W wielu innych językach programowania powiedzielibyśmy, że utworzono obiekt klasy `Komorka`. Ponieważ jednak _JavaScript_ nie używa klas, określenie takie byłoby niewłaściwe.
+* Następnie, wewnątrz nowo utworzonego obiektu, tworzymy zmienne `t` i `r`, do których przypisujemy wskazania na węzły `tXY` oraz `rXY` z przygotowanego wcześniej pliku SVG. W miejscu zmiennej `XY` oczywiście wstawione będą współrzędne komórki, dlatego przykładowo zmienna `gra.A1.t` będzie zawierać wskazanie na węzeł `tA1`, a np. zmienna `gra.G8.r` będzie wskazywać na węzeł `rG8`.
+* W kolejnym kroku, przy pomocy metody `ustaw()`, przypisujemy naszej komórce wartość figury odczytanej z ciągu wejściowego. Do tego celu używamy zmiennej tablicowej figury. W metodzie `ustaw()` znajdują się natomiast instrukcje przypisujące wartość figury odpowiedniej zmiennej oraz ustawiające kolor wyświetlanej figury.
+* Na koniec wywołujemy metodę `pokaz_figure()`, w której na razie przekazujemy parametr 1, aby zobaczyć, czy nasz kod zadziała prawidłowo i szachownica zapełni nam się figurami.
 
-// zaznaczanie i ukrywanie podswietlenia (ustawianie widoczności obramowania)
-Komorka.prototype.pokaz_podswietlenie = function(widocznosc) {
-    this.r.style.strokeOpacity = widocznosc;
-    this.r.style.opacity = widocznosc;
-}
-
-// konstruktor obiektu 'gra'
-function Gra() {
-    var cols = '_ABCDEFGH';
-    var rows = '_12345678';
-    var XY;
-  
-    // inicjacja gry
-    this.init = function(initBoard) {
-        // utworzenie tablicy wierszy na podstawie parametru initBoard
-        var figury = initBoard.split('_');
-
-        //pętla w pętli
-        for (var i = 1; i < cols.length; i++) {
-            for (var j = 1; j < rows.length; j++) {
-                
-                // współrzędne komórki
-                XY = cols[i] + rows[j];
-
-                // utworzenie obiektu komórki
-                this[XY] = new Komorka(XY);
-
-                // powiązanie obiektów rXY i tXY z komórką XY
-                this[XY].t = document.getElementById('t'+XY);
-                this[XY].r = document.getElementById('r'+XY);
-
-                // przypisanie wartości figury (wywołanie funkcji ustaw)
-                this[XY].ustaw(figury[j-1][i-1]);
-
-                // pokazanie wszystkich figur
-                this[XY].pokaz_figure(1);
-            }
-        }
-    }
-}
-Jak widać, plik app.js aktualnie zawiera pięć funkcji, z czego dwie są konstruktorami (Komorka() i Gra()), a trzy pozostałe są metodami obiektu komorka (ustaw(), pokaz_figure(), oraz pokaz_podswietlenie()). Przyjęło się, że funkcje będące konstruktorem oznaczamy wielką literą, aby odróżnić je od innych funkcji. Funkcję będącą konstruktorem obiektu można bowiem wywołać tak samo, jak każdą inną funkcję i nie jest to błędem. Różnica pojawia się dopiero wtedy, gdy przy wywołaniu funkcji użyjemy operatora new – wtedy funkcja ta zwróci nam zmienną obiektową.
-
-Inicjalnie tworzymy obiekt gra, który zawiera metodę init(). To właśnie tę metodę wywołujemy jednorazowo, przekazując na wejściu ciąg znaków z zakodowanym rozstawieniem figur. Wewnątrz tej metody znajdziemy dwie pętle (jedną zagnieżdżoną w drugiej), w których kolumna po kolumnie, wiersz po wierszu, wykonujemy kolejno kilka czynności.
-
-Ustalamy współrzędne aktualnej komórki i przypisujemy je do zmiennej XY. Pomagają nam w tym zmienne cols i rows. Zauważmy, że wszystkie trzy zmienne należą do właściwości obiektu gra.
-Tworzymy instancję obiektu o nazwie zawierającej ustalone wcześniej współrzędne. W tym celu korzystamy z konstruktora Komorka(), zdefiniowanego wyżej w tym samym pliku. W wielu innych językach programowania powiedzielibyśmy, że utworzono obiekt klasy Komorka. Ponieważ jednak JavaScript nie używa klas, określenie takie byłoby niewłaściwe.
-Następnie, wewnątrz nowo utworzonego obiektu, tworzymy zmienne t i r, do których przypisujemy wskazania na węzły tXY oraz rXY z przygotowanego wcześniej pliku SVG. W miejscu zmiennej XY oczywiście wstawione będą współrzędne komórki, dlatego przykładowo zmienna gra.A1.t będzie zawierać wskazanie na węzeł tA1, a np. zmienna gra.G8.r będzie wskazywać na węzeł rG8.
-W kolejnym kroku, przy pomocy metody ustaw(), przypisujemy naszej komórce wartość figury odczytanej z ciągu wejściowego. Do tego celu używamy zmiennej tablicowej figury. W metodzie ustaw()znajdują się natomiast instrukcje przypisujące wartość figury odpowiedniej zmiennej oraz ustawiające kolor wyświetlanej figury.
-Na koniec wywołujemy metodę pokaz_figure(), w której na razie przekazujemy parametr 1, aby zobaczyć, czy nasz kod zadziała prawidłowo i szachownica zapełni nam się figurami.
 W efekcie, po odświeżeniu przeglądarki, powinien pojawić się taki widok:
+![Zrzut ekranu 2017-06-21 o 09 41 21](https://user-images.githubusercontent.com/16913527/222834362-4f3ed636-84ca-41ee-b750-631ed461442e.png)
 
+Już na pierwszy rzut oka widać różnicę między metodą `init()` wewnątrz obiektu `gra` a metodami `ustaw()` i `pokaz_figure()` wewnątrz obiektów komórek. Te ostatnie nie są zadeklarowane bezpośrednio w konstruktorze `Komorka()`, lecz „piętro wyżej”, w jego prototypie. Dlaczego warto pisać w ten sposób? Warto, ponieważ gdybyśmy umieścili definicję tych metod bezpośrednio w obiektach, ich kod byłby powielony 64 razy, zajmując niepotrzebnie miejsce w pamięci komputera. Umieszczając definicje tych dwóch metod w prototypie, mamy pewność, że ich kod przechowywany jest w pamięci tylko raz. W przypadku metody `init()` nie ma znaczenia, gdzie umieścimy jej definicję, ponieważ obiekt gra jest utworzony tylko raz. Zatem cały jego kod, łącznie z metodą `init()`, również zajmuje tylko jedno miejsce w pamięci.
 
-Już na pierwszy rzut oka różnicę między metodą init() wewnątrz obiektu gra a metodami ustaw() i pokaz_figure() wewnątrz obiektów komórek. Te ostatnie nie są zadeklarowane bezpośrednio w konstruktorze Komorka(), lecz „piętro wyżej”, w jego prototypie. Dlaczego warto pisać w ten sposób? Warto, ponieważ gdybyśmy umieścili definicję tych metod bezpośrednio w obiektach, ich kod byłby powielony 64 razy, zajmując niepotrzebnie miejsce w pamięci komputera. Umieszczając definicje tych dwóch metod w prototypie, mamy pewność, że ich kod przechowywany jest w pamięci tylko raz. W przypadku metody init() nie ma znaczenia, gdzie umieścimy jej definicję, ponieważ obiekt gra jest utworzony tylko raz. Zatem cały jego kod, łącznie z metodą init(), również zajmuje tylko jedno miejsce w pamięci.
-
-Zaznaczanie pól
+## Zaznaczanie pól
 Zajmijmy się teraz zaznaczaniem pól szachownicy. Rozpatrujemy dwa przypadki, które dla potrzeb tego artykułu nazwijmy „klikami”: parzystym i nieparzystym. Klik nieparzysty to np. pierwsze kliknięcie na pustej szachownicy, które odkrywa pierwszą figurę. Gdy jakaś figura jest już odkryta, ale nie ma jeszcze swojej „pary”, kolejne kliknięcie jest klikiem parzystym, ponieważ odkrywa drugą figurę w celu sprawdzenia, czy do siebie pasują. Następne jest znowu nieparzyste itd. Liczą się tylko kliknięcia na nieodkrytych polach szachownicy. Kliknięcie na dowolnym, pustym polu szachownicy, powinno wywołać następujące efekty:
+* na klikniętym polu pojawi się ukryta wcześniej, przypisana do niego figura,
+* pole to zostanie zaznaczone zieloną obwódką.
 
-na klikniętym polu pojawi się ukryta wcześniej, przypisana do niego figura,
-pole to zostanie zaznaczone zieloną obwódką.
 Dalsze efekty będą się różniły w zależności od rodzaju kliknięcia. Klik nieparzysty spowoduje, że dodatkowo podświetlą się wszystkie pola, które bije nowo odkryta figura (zajmiemy się tym w dalszej części). Klik parzysty natomiast:
+* powinien ukryć wszystkie pola bicia odkrytej wcześniej figury,
+* po drugie, z pewnym opóźnieniem (powiedzmy – po sekundzie), powinien ukryć obwódkę zaznaczenia z obydwu pól.
 
-powinien ukryć wszystkie pola bicia odkrytej wcześniej figury,
-po drugie, z pewnym opóźnieniem (powiedzmy – po sekundzie), powinien ukryć obwódkę zaznaczenia z obydwu pól.
 Następnie zweryfikujemy, czy obydwie odkryte figury do siebie pasują, czyli:
+* czy wartości figur są takie same,
+* czy kolory figur się zgadzają,
+* czy obie figury biją się nawzajem.
 
-czy wartości figur są takie same,
-czy kolory figur się zgadzają,
-czy obie figury biją się nawzajem.
-Jeśli wszystkie trzy warunki będą się zgadzać, obydwie figury pozostaną odkryte już do końca gry. W przeciwnym razie obie powinny zniknąć, czyli zostać z powrotem ukryte. Zaczynamy więc od obsłużenia zdarzenia onClick obiektów rXY, które specjalnie w tym celu wcześniej przygotowaliśmy. Najpierw tworzymy zmienną gra.zaznaczona wewnątrz obiektu gra, która będzie przechowywać informację o aktualnie zaznaczonej komórce:
+Jeśli wszystkie trzy warunki będą się zgadzać, obydwie figury pozostaną odkryte już do końca gry. W przeciwnym razie obie powinny zniknąć, czyli zostać z powrotem ukryte. Zaczynamy więc od obsłużenia zdarzenia `onClick` obiektów `rXY`, które specjalnie w tym celu wcześniej przygotowaliśmy. Najpierw tworzymy zmienną `zaznaczona` wewnątrz obiektu `gra`, która będzie przechowywać informację o aktualnie zaznaczonej komórce:
 
+```js
 this.zaznaczona = '00';
-Następnie wiążemy zdarzenie onClick z nową metodą klik(), którą za chwilę uzupełnimy. Wiązanie to robimy wewnątrz opisanej wcześniej pętli. Pamiętamy też, aby zmienić inicjalne wyświetlanie figur – domyślnie powinny być ukryte:
+```
 
+Następnie wiążemy zdarzenie `onClick` z nową metodą `klik()`, którą za chwilę uzupełnimy. Wiązanie to robimy wewnątrz opisanej wcześniej pętli. Pamiętamy też, aby zmienić inicjalne wyświetlanie figur – domyślnie powinny być ukryte:
+
+```js
 // inicjalnie wszystkie figury powinny być ukryte
 this[XY].pokaz_figure(0);
 
 // obsługa kliknięcia komórki
 this[XY].r.onclick = this[XY].klik.bind(this[XY]);
-Metoda klik() natomiast będzie zawierać obsługę właściwą gry. Na razie jednak tylko wywołuje zaznaczenie komórki oraz ukrywa zaznaczenia z obydwu odkrytych wcześniej figur po upłynięciu sekundy od kliku parzystego:
+```
 
+Metoda `klik()` natomiast będzie zawierać obsługę właściwą gry. Na razie jednak tylko wywołuje zaznaczenie komórki oraz ukrywa zaznaczenia z obydwu odkrytych wcześniej figur po upłynięciu sekundy od kliku parzystego:
+
+```js
 // obsługa kliknięcia komórki
 Komorka.prototype.klik = function() {
     // gdy figura już jest odkryta to nic nie robimy
@@ -215,12 +155,15 @@ Komorka.prototype.klik = function() {
         gra.zaznaczona = '00';
     }
 }
-Jak widać, skorzystałem z instrukcji setTimeout(), w której ustawiłem czas opóźnienia na 1000 milisekund. Odświeżamy przeglądarkę i testujemy odkrywanie figur. Zaznaczenia znikają po sekundzie od odkrycia drugiej figury.
+```
 
+Jak widać, używamy instrukcji `setTimeout()`, w której ustawiono czas opóźnienia na 1000 milisekund. Odświeżamy przeglądarkę i testujemy odkrywanie figur. Zaznaczenia znikają po sekundzie od odkrycia drugiej figury.
+![Zrzut ekranu 2017-06-21 o 09 44 21](https://user-images.githubusercontent.com/16913527/222836781-37201320-411f-4707-b65f-a825173595f5.png)
 
-Zaznaczanie i ukrywanie pól bicia
-W następnej kolejności zajmiemy się wyświetlaniem pól bicia każdej figury. Samo podświetlanie nie jest niczym skomplikowanym. Będziemy postępować analogicznie do zaznaczania klików, z tą różnicą, że tym razem będziemy zmieniać parametr wypełnienia pola, zamiast obwódki. Skąd jednak mamy wiedzieć, które pola podświetlić? Czy w dalszej części artykułu będziemy implementować skomplikowane algorytmy wyliczające na bieżąco, które pola powinny być podświetlone? Chociaż takie rozwiązanie jest kuszące, proponuję inne podejście. W oddzielnym pliku bicia.js zdefiniujemy wszystkie możliwe pola bicia dla każdej figury i każdego pola oddzielnie. Będzie to wymagało trochę żmudnej pracy przy inicjalnym wypełnieniu pliku danymi, jednak z punktu widzenia „elegancji” programu, to rozwiązanie wydaje mi się dużo bardziej przejrzyste. Plik bicia() wypełniamy według następującego schematu:
+## Zaznaczanie i ukrywanie pól bicia
+W następnej kolejności zajmiemy się wyświetlaniem pól bicia każdej figury. Samo podświetlanie nie jest niczym skomplikowanym. Będziemy postępować analogicznie do zaznaczania klików, z tą różnicą, że tym razem będziemy zmieniać parametr wypełnienia pola, zamiast obwódki. Skąd jednak mamy wiedzieć, które pola podświetlić? W oddzielnym pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) zdefiniujemy wszystkie możliwe pola bicia dla każdej figury i każdego pola oddzielnie. Będzie to wymagało trochę żmudnej pracy przy inicjalnym wypełnieniu pliku danymi, jednak z punktu widzenia „elegancji” programu, to rozwiązanie wydaje mi się dużo bardziej przejrzyste. Plik wypełniamy według następującego schematu:
 
+```js
 var bicia = {
     h: {
         A1: 'B1_C1_D1_E1_F1_G1_H1_A2_A3_A4_A5_A6_A7_A8_B2_C3_D4_E5_F6_G7_H8',
@@ -243,19 +186,28 @@ var bicia = {
 ...
     }
 }
-Zawartość pliku bicia.js stanowi obiekt bicia, który zawiera cztery inne obiekty: h,w,g,s, odpowiadające czterem figurom szachowym. Każdy z obiektów będzie zawierać 64 zmienne XY, reprezentujące wszystkie współrzędne na szachownicy. Pola bicia natomiast występują w ciągu tekstowym jako zbiór współrzędnych pooddzielanych znakiem podkreślenia. 
+```
 
-Powyższy fragment zawiera pola bicia tylko dwóch pól: A1 i A2. W miejscu kropek należy uzupełnić resztę pól szachownicy. Tę pracę trzeba wykonać uważnie, bo łatwo tu o pomyłkę. Jednak od razu widać pewne prawidłowości i powtarzające się fragmenty. Mając na przykład pola bicia hetmana, automatycznie uzyskujemy pola bicia wieży i gońca jako dwa rozdzielne podzbiory zbioru głównego. Przygotowanie całego pliku bicia.js wraz z przetestowaniem zajęło mi jedno popołudnie.
+Zawartość pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) stanowi obiekt bicia, który zawiera cztery inne obiekty: `h`, `w`, `g`, `s`, odpowiadające czterem figurom szachowym. Każdy z obiektów będzie zawierać 64 zmienne `XY`, reprezentujące wszystkie współrzędne na szachownicy. Pola bicia natomiast występują w ciągu tekstowym jako zbiór współrzędnych pooddzielanych znakiem podkreślenia. 
 
-Na podstawie pliku bicia.js będziemy wypełniać tablicę pól bitych przez daną figurę, zajmującą komórkę o podanych współrzędnych. Zaczynamy od dodania w konstruktorze obiektu komorka zmiennej o nazwie bicia, reprezentującej tę tablicę:
+Powyższy fragment zawiera pola bicia tylko dwóch pól: `A1` i `A2`. W miejscu kropek należy uzupełnić resztę pól szachownicy. Tę pracę trzeba wykonać uważnie, bo łatwo tu o pomyłkę. Jednak od razu widać pewne prawidłowości i powtarzające się fragmenty. Mając na przykład pola bicia hetmana, automatycznie uzyskujemy pola bicia wieży i gońca jako dwa rozdzielne podzbiory zbioru głównego. Przygotowanie całego pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) wraz z przetestowaniem zajęło mi jedno popołudnie.
 
+Na podstawie tego pliku będziemy wypełniać tablicę pól bitych przez daną figurę, zajmującą komórkę o podanych współrzędnych. Zaczynamy od dodania w konstruktorze obiektu komorka zmiennej o nazwie bicia, reprezentującej tę tablicę:
+
+```js
 this.bicia = [];    // lista pól, które bije figura ustawiona w tej komórce
-Wypełnianie tablicy natomiast będzie się odbywać tuż po przypisaniu danej figury do komórki, czyli wewnątrz pętli inicjującej szachownicę, w metodzie init() obiektu gra:
+```
 
+Wypełnianie tablicy natomiast będzie się odbywać tuż po przypisaniu danej figury do komórki, czyli wewnątrz pętli inicjującej szachownicę, w metodzie `init()` obiektu `gra`:
+
+```js
 // przypisanie pól bicia dla danej figury
 this[XY].bicia = bicia[figury[j-1][i-1].toLowerCase()][XY].split('_');
+```
+
 Gdy już mamy do każdej komórki przypisaną listę pól, które bije stojąca na niej figura, wystarczy obsłużyć wyświetlanie pól bicia dla klików nieparzystych. W tym celu dodajemy dwie nowe metody w prototypie komórki:
 
+```js
 // zaznaczanie i ukrywanie bicia (ustawianie widoczności wypełnienia)
 Komorka.prototype.pokaz_bicie = function(widocznosc) {
     this.r.style.fillOpacity = 0.5 * widocznosc;
@@ -272,10 +224,13 @@ Komorka.prototype.zaznacz_bicia = function(widocznosc) {
         }
     }
 }
-Jak widać, wyświetlenie pól bicia odbywa się poprzez ustawienie widoczności wypełnienia obiektu rXY na 50 procent, co daje wrażenie półprzezroczystości.
+```
 
-Teraz pozostaje tylko wywołać nowo dodaną metodę zaznacz_bicia() wewnątrz fragmentu kodu obsługującego klik nieparzysty (zaznaczenie) oraz parzysty (odznaczenie). Poza tym dodajemy też jedną linijkę kodu, która usuwa podświetlenie bicia na klikniętej komórce. Cała metoda klik() wygląda teraz następująco:
+Jak widać, wyświetlenie pól bicia odbywa się poprzez ustawienie widoczności wypełnienia obiektu `rXY` na 50 procent, co daje wrażenie półprzezroczystości.
 
+Teraz pozostaje tylko wywołać nowo dodaną metodę `zaznacz_bicia()` wewnątrz fragmentu kodu obsługującego klik nieparzysty (zaznaczenie) oraz parzysty (odznaczenie). Poza tym dodajemy też jedną linijkę kodu, która usuwa podświetlenie bicia na klikniętej komórce. Cała metoda `klik()` wygląda teraz następująco:
+
+```js
 // obsługa kliknięcia komórki
 Komorka.prototype.klik = function() {
     // gdy figura już jest odkryta to nic nie robimy
@@ -312,8 +267,11 @@ Komorka.prototype.klik = function() {
         gra.zaznaczona = '00';
     }
 }
-Gdy już mamy obsłużone zaznaczanie pól bicia, możemy przetestować, czy plik bicia.js jest wypełniony prawidłowo. Można to zrobić, wyświetlając po kolei wszystkie figury na wszystkich polach szachownicy. Znowu trochę żmudnej pracy, ale w ten sposób mamy pewność, że plik bicia.js nie zawiera błędów (w testach okazało się, że kilka chochlików przeoczyłem). W pliku index.html dodajemy odnośnik do pliku bicia.js oraz testowe wywołania funkcji init():
+```
 
+Gdy już mamy obsłużone zaznaczanie pól bicia, możemy przetestować, czy plik [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) jest wypełniony prawidłowo. Można to zrobić, wyświetlając po kolei wszystkie figury na wszystkich polach szachownicy. Znowu trochę żmudnej pracy, ale w ten sposób mamy pewność, że plik nie zawiera błędów (w testach okazało się, że kilka chochlików przeoczyłem). W pliku [index.html](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/index.html) dodajemy odnośnik do pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) oraz testowe wywołania funkcji init():
+
+```html
 <script scr="bicia.js"></script>    
 <script scr="app.js"></script>
 <script>
@@ -325,10 +283,12 @@ Gdy już mamy obsłużone zaznaczanie pól bicia, możemy przetestować, czy pli
         //gra.init('wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww');
           gra.init('ssssssss_ssssssss_ssssssss_ssssssss_ssssssss_ssssssss_ssssssss_ssssssss');
 </script>
+```
+
 Przykładowy test:
+![Zrzut ekranu 2017-06-21 o 09 45 36](https://user-images.githubusercontent.com/16913527/222838414-2c7da7aa-096f-467b-80a0-07b951912b2c.png)
 
-
-Ukrywanie niepasujących figur
+## Ukrywanie niepasujących figur
 Mamy już wyświetlanie figur, mamy zaznaczanie i odznaczanie pól, mamy też podświetlanie i ukrywanie pól bicia. Do w pełni działającej gry pozostało już tylko ukrywanie zaznaczonych figur, które do siebie nie pasują. Jak już wcześniej wspomniałem, aby to obsłużyć, musimy wykonać potrójne sprawdzenie:
 
 czy wartości figur są takie same,
