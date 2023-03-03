@@ -2,7 +2,7 @@
 Gra napisana w języku JavaScript, przy wykorzystaniu grafiki SVG.
 
 ## Wstęp
-ChessMemory jest prostą grą planszową, którą wymyśliłem i napisałem kiedyś w ramach zajęć z przedmiotu Podstawy Programowania.
+[ChessMemory](https://jarfos.github.io/ChessMemory/) jest prostą grą planszową, którą wymyśliłem i napisałem kiedyś w ramach zajęć z przedmiotu Podstawy Programowania.
 
 Oczywiście nie wróżę tej grze wielkiego sukcesu komercyjnego, nie zamierzam jej jakoś szczególnie promować. Chodzi wyłącznie o wykorzystanie kilku narzędzi i napisanie paru linijek kodu. Może w ten sposób zainspiruję część początkujących programistów do realizacji własnych pomysłów, a przy okazji poruszę kilka zagadnień związanych z programowaniem...
 
