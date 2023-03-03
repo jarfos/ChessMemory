@@ -277,8 +277,7 @@ Gdy już mamy obsłużone zaznaczanie pól bicia, możemy przetestować, czy pli
 <script>
   var gra = new Gra();
         //gra.init('HHSgwWsh_SgGHHWwh_WWshGsHH_sgwSgwhW_gwHGgghg_hSSswSsW_GGGWWhwG_SwsGhHSs');
-        //gra.init('hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh
-');
+        //gra.init('hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh_hhhhhhhh');
         //gra.init('gggggggg_gggggggg_gggggggg_gggggggg_gggggggg_gggggggg_gggggggg_gggggggg');
         //gra.init('wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww_wwwwwwww');
           gra.init('ssssssss_ssssssss_ssssssss_ssssssss_ssssssss_ssssssss_ssssssss_ssssssss');
@@ -286,16 +285,18 @@ Gdy już mamy obsłużone zaznaczanie pól bicia, możemy przetestować, czy pli
 ```
 
 Przykładowy test:
+
 ![Zrzut ekranu 2017-06-21 o 09 45 36](https://user-images.githubusercontent.com/16913527/222838414-2c7da7aa-096f-467b-80a0-07b951912b2c.png)
 
 ## Ukrywanie niepasujących figur
 Mamy już wyświetlanie figur, mamy zaznaczanie i odznaczanie pól, mamy też podświetlanie i ukrywanie pól bicia. Do w pełni działającej gry pozostało już tylko ukrywanie zaznaczonych figur, które do siebie nie pasują. Jak już wcześniej wspomniałem, aby to obsłużyć, musimy wykonać potrójne sprawdzenie:
+* czy wartości figur są takie same,
+* czy kolory figur się zgadzają,
+* czy obie figury biją się nawzajem.
 
-czy wartości figur są takie same,
-czy kolory figur się zgadzają,
-czy obie figury biją się nawzajem.
-Wszystkie trzy warunki muszą być spełnione, aby obydwie figury zostały odkryte. W przeciwnym razie obydwie figury powinny zostać ukryte sekundę po kliku parzystym, czyli równo z ukryciem podświetlenia figur. Powyższe warunki sprawdzamy dla kliku parzystego, w jednej instrukcji if, zawierającej iloczyn logiczny dwóch prostych warunków:
+Wszystkie trzy warunki muszą być spełnione, aby obydwie figury zostały odkryte. W przeciwnym razie obydwie figury powinny zostać ukryte sekundę po kliku parzystym, czyli równo z ukryciem podświetlenia figur. Powyższe warunki sprawdzamy dla kliku parzystego, w jednej instrukcji `if`, zawierającej iloczyn logiczny dwóch prostych warunków:
 
+```js
 // jeśli figury do siebie pasują oraz jest bicie...
 if ((gra[fig1].figura === gra[fig2].figura) && (gra[fig1].bicia.indexOf(fig2) >= 0)) {
     // ... to figury do siebie pasują
@@ -306,11 +307,14 @@ if ((gra[fig1].figura === gra[fig2].figura) && (gra[fig1].bicia.indexOf(fig2) >=
         gra[fig2].pokaz_figure(0);
     }, 1000);
 }
+```
+
 Gotowe. Aplikacja działa prawidłowo, można już grać.
 
-Dodatki
+## Dodatki
 Jak przystało na grę logiczną, przydałby się jeszcze jakiś stoper. Poza tym dobrze by było zliczać wszystkie kliknięcia oraz pokazywać liczbę odkrytych figur. Dodajmy zatem te trzy elementy do naszej gry. W tym celu w pliku index.html wstawiamy prostą strukturę (tabelę), w której będziemy wyświetlać odpowiednie dane:
 
+```html
     <table align=center>
         <tr>
             <td>Licznik:</td><td><div id="dLicznik">0</div></td>
@@ -318,8 +322,11 @@ Jak przystało na grę logiczną, przydałby się jeszcze jakiś stoper. Poza ty
             <td>Figury: </td><td><div id="dFigury"> 0</div></td>
         </tr>
     </table>
-Następnie utworzymy obiekt stoper, którego konstruktor dodajemy do pliku app.js:
+```
 
+Następnie utworzymy obiekt `stoper`, którego konstruktor dodajemy do pliku [app.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/app.js):
+
+```js
 // konstruktor obiektu 'stoper'
 function Stoper() {
     this.czasStartu;
@@ -340,8 +347,11 @@ function Stoper() {
         clearInterval(this.intervalID);
     }
 }
-Obiekt stoper zawiera dwie zmienne: czasStartu oraz intervalID. Pierwsza służy do zapamiętania dokładnego czasu uruchomienia stopera, druga natomiast będzie zawierać informację o identyfikatorze interwału, czyli procesu uruchomionego w instrukcji setInterval(). W obiekcie tym znajdują się ponadto trzy metody służące do jego uruchomienia, odświeżenia oraz zatrzymania. W metodzie uruchom() ustawiamy proces, który co 16 milisekund będzie odświeżać wyświetlaną wartość stopera. Dlaczego akurat 16 milisekund, a nie mniej? Ponieważ ludzkie oko nie jest w stanie wychwycić zmian zachodzących szybciej i odświeżanie napisu np. co milisekundę nie miałoby sensu. Obiekt stoper będzie umiejscowiony wewnątrz obiektu gra, razem z licznikiem kliknięć oraz licznikiem odkrytych figur. Dodajemy zatem w konstruktorze gry następujący fragment:
+```
 
+Obiekt `stoper` zawiera dwie zmienne: `czasStartu` oraz `intervalID`. Pierwsza służy do zapamiętania dokładnego czasu uruchomienia stopera, druga natomiast będzie zawierać informację o identyfikatorze interwału, czyli procesu uruchomionego w instrukcji `setInterval()`. W obiekcie tym znajdują się ponadto trzy metody służące do jego uruchomienia, odświeżenia oraz zatrzymania. W metodzie `uruchom()` ustawiamy proces, który co 16 milisekund będzie odświeżać wyświetlaną wartość stopera. Dlaczego akurat 16 milisekund, a nie mniej? Ponieważ ludzkie oko nie jest w stanie wychwycić zmian zachodzących szybciej i odświeżanie napisu np. co milisekundę nie miałoby sensu. Obiekt `stoper` będzie umiejscowiony wewnątrz obiektu `gra`, razem z licznikiem kliknięć oraz licznikiem odkrytych figur. Dodajemy zatem w konstruktorze gry następujący fragment:
+
+```js
     // obsługa licznika kliknięć
     this.licznikKlikniec = 0;
     this.zwiekszLicznik = function() {
@@ -373,14 +383,18 @@ Zatrzymanie licznika natomiast umieszczamy na końcu metody klik() (pod warunkie
     if (gra.licznikFigur === 16) {
         gra.stoper.zatrzymaj();
     }
+```
+
 Na koniec pozostało wywołanie zwiększenia licznika odkrytych figur, które powinno zostać umieszczone we fragmencie kodu odpowiadającego za sprawdzenie, czy figury do siebie pasują:
 
+```js
 // ... to figury do siebie pasują, więc zwiększamy licznik figur
 gra.zwiekszFigury();
+```
+
 Końcowy efekt prezentuje się następująco:
+![Zrzut ekranu 2017-06-21 o 09 46 52](https://user-images.githubusercontent.com/16913527/222840180-63627ce8-5329-45fd-9c93-3ac203dc492d.png)
 
-
-Jak widać, napisanie prostej gry nie stanowi zbyt wymagającego wyzwania. Plik app.js, czyli „silnik” gry zajmuje zaledwie 194 linie, przy czym można go jeszcze porządnie odchudzić, usuwając komentarze i białe znaki (wspomniana wcześniej minifikacja).
-
-Co dalej?
-Mechanizm gry jest już gotowy, ale żeby móc zagrać, potrzebujemy jeszcze generatora losowego inicjalnego ustawienia figur. Zajmiemy się tym w trzeciej części cyklu.
+## Podsumowanie
+Jak widać, napisanie prostej gry nie stanowi zbyt wymagającego wyzwania. Plik [app.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/app.js), czyli „silnik” gry zajmuje zaledwie 194 linie, przy czym można go jeszcze porządnie odchudzić, usuwając komentarze i białe znaki (wspomniana wcześniej [minifikacja](https://pl.wikipedia.org/wiki/Minifikacja)).
+Co dalej? Mechanizm gry jest już gotowy, ale żeby gra była kompletna, potrzebujemy jeszcze generatora losowego inicjalnego ustawienia figur. Zajmiemy się tym w [trzeciej części](https://github.com/jarfos/ChessMemory/tree/main/ChessMemory_part3).
