@@ -15,7 +15,7 @@ Oczywiście nie wróżę tej grze wielkiego sukcesu komercyjnego, nie zamierzam 
 * Odkrycie dwóch identycznych figur w tym samym kolorze, lecz stojących na polach, które nie są „bite” przez drugą figurę, traktowane jest jak odkrycie dwóch różnych figur.
 
 ## Zawartość
-W [pierwszej części](https://github.com/jarfos/ChessMemory/tree/main/ChessMemory_part1) opisuję, jak stworzyć planszę do gry. Jest to szachownica przygotowana w programie Inkscape i zapisana jako plik SVG. Ponadto, również w Inkscape, przygotujemy 4 figury szachowe, z których następnie powstanie czcionka ```TrueType```. Wykorzystamy ją później jako „nośnik” glyphów.
+W [pierwszej części](https://github.com/jarfos/ChessMemory/tree/main/ChessMemory_part1) opisuję, jak stworzyć planszę do gry. Jest to szachownica przygotowana w programie Inkscape i zapisana jako plik SVG. Ponadto, również w Inkscape, przygotujemy 4 figury szachowe, z których następnie powstanie czcionka TrueType. Wykorzystamy ją później jako „nośnik” glyphów.
 
 [Druga część](https://github.com/jarfos/ChessMemory/tree/main/ChessMemory_part2) zawiera silnik gry, czyli program do rozstawiania figur na szachownicy, inicjację gry, wyświetlanie i ukrywanie figur. Dodatkową funkcjonalnością jest podświetlanie pól bicia każdej figury. Poza tym dochodzi obsługa logiki gry oraz wyświetlanie wyników (licznik) i czasu trwania gry (stoper).
 
