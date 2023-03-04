@@ -188,7 +188,7 @@ var bicia = {
 }
 ```
 
-Zawartość pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) stanowi obiekt bicia, który zawiera cztery inne obiekty: `h`, `w`, `g`, `s`, odpowiadające czterem figurom szachowym. Każdy z obiektów będzie zawierać 64 zmienne `XY`, reprezentujące wszystkie współrzędne na szachownicy. Pola bicia natomiast występują w ciągu tekstowym jako zbiór współrzędnych pooddzielanych znakiem podkreślenia. 
+Zawartość pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) stanowi obiekt `bicia`, który zawiera cztery inne obiekty: `h`, `w`, `g`, `s`, odpowiadające czterem figurom szachowym. Każdy z obiektów będzie zawierać 64 zmienne `XY`, reprezentujące wszystkie współrzędne na szachownicy. Pola bicia natomiast występują w ciągu tekstowym jako zbiór współrzędnych pooddzielanych znakiem podkreślenia. 
 
 Powyższy fragment zawiera pola bicia tylko dwóch pól: `A1` i `A2`. W miejscu kropek należy uzupełnić resztę pól szachownicy. Tę pracę trzeba wykonać uważnie, bo łatwo tu o pomyłkę. Jednak od razu widać pewne prawidłowości i powtarzające się fragmenty. Mając na przykład pola bicia hetmana, automatycznie uzyskujemy pola bicia wieży i gońca jako dwa rozdzielne podzbiory zbioru głównego. Przygotowanie całego pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) wraz z przetestowaniem zajęło mi jedno popołudnie.
 
@@ -269,7 +269,7 @@ Komorka.prototype.klik = function() {
 }
 ```
 
-Gdy już mamy obsłużone zaznaczanie pól bicia, możemy przetestować, czy plik [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) jest wypełniony prawidłowo. Można to zrobić, wyświetlając po kolei wszystkie figury na wszystkich polach szachownicy. Znowu trochę żmudnej pracy, ale w ten sposób mamy pewność, że plik nie zawiera błędów (w testach okazało się, że kilka chochlików przeoczyłem). W pliku [index.html](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/index.html) dodajemy odnośnik do pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) oraz testowe wywołania funkcji init():
+Gdy już mamy obsłużone zaznaczanie pól bicia, możemy przetestować, czy plik [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) jest wypełniony prawidłowo. Można to zrobić, wyświetlając po kolei wszystkie figury na wszystkich polach szachownicy. Znowu trochę żmudnej pracy, ale w ten sposób mamy pewność, że plik nie zawiera błędów (w testach okazało się, że kilka chochlików przeoczyłem). W pliku [index.html](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/index.html) dodajemy odnośnik do pliku [bicia.js](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/bicia.js) oraz testowe wywołania funkcji `init()`:
 
 ```html
 <script scr="bicia.js"></script>    
@@ -312,7 +312,7 @@ if ((gra[fig1].figura === gra[fig2].figura) && (gra[fig1].bicia.indexOf(fig2) >=
 Gotowe. Aplikacja działa prawidłowo, można już grać.
 
 ## Dodatki
-Jak przystało na grę logiczną, przydałby się jeszcze jakiś stoper. Poza tym dobrze by było zliczać wszystkie kliknięcia oraz pokazywać liczbę odkrytych figur. Dodajmy zatem te trzy elementy do naszej gry. W tym celu w pliku index.html wstawiamy prostą strukturę (tabelę), w której będziemy wyświetlać odpowiednie dane:
+Jak przystało na grę logiczną, przydałby się jeszcze jakiś stoper. Poza tym dobrze by było zliczać wszystkie kliknięcia oraz pokazywać liczbę odkrytych figur. Dodajmy zatem te trzy elementy do naszej gry. W tym celu w pliku [index.html](https://github.com/jarfos/ChessMemory/blob/main/ChessMemory_part2/index.html) wstawiamy prostą strukturę (tabelę), w której będziemy wyświetlać odpowiednie dane:
 
 ```html
     <table align=center>
@@ -368,8 +368,11 @@ Obiekt `stoper` zawiera dwie zmienne: `czasStartu` oraz `intervalID`. Pierwsza s
 
     // utworzenie obiektu stopera
     this.stoper = new Stoper();
-Następnie, w metodzie klik() uruchamiamy stoper (tylko jeśli jest to pierwsze kliknięcie) oraz zwiększamy licznik kliknięć:
+```
 
+Następnie w metodzie `klik()` uruchamiamy stoper (tylko jeśli jest to pierwsze kliknięcie) oraz zwiększamy licznik kliknięć:
+
+```js
     // uruchomienie stopera
     if (gra.licznikKlikniec === 0) {
         gra.stoper.uruchom();
@@ -377,8 +380,11 @@ Następnie, w metodzie klik() uruchamiamy stoper (tylko jeśli jest to pierwsze 
 
     // zwiększamy licznik kliknięć o 1
     gra.zwiekszLicznik();
-Zatrzymanie licznika natomiast umieszczamy na końcu metody klik() (pod warunkiem, że wszystkie 64 figury zostały już odkryte):
+```
 
+Zatrzymanie licznika natomiast umieszczamy na końcu metody `klik()` (pod warunkiem, że wszystkie 64 figury zostały już odkryte):
+
+```js
     // zatrzymanie stopera
     if (gra.licznikFigur === 16) {
         gra.stoper.zatrzymaj();
@@ -393,6 +399,7 @@ gra.zwiekszFigury();
 ```
 
 Końcowy efekt prezentuje się następująco:
+
 ![Zrzut ekranu 2017-06-21 o 09 46 52](https://user-images.githubusercontent.com/16913527/222840180-63627ce8-5329-45fd-9c93-3ac203dc492d.png)
 
 ## Podsumowanie
