@@ -167,5 +167,11 @@ for (var i = 0; i < zasieg.length; i++) {
 
 Pętla kończy się wyczyszczeniem obydwu wylosowanych pól przed kolejnym krokiem, a na samym końcu – zwiększeniem indeksu o 1 (`index++`).
 
+```js
+XY1 = '00';
+XY2 = '00';
+index++;
+```
+
 ## Podsumowanie
 I to już koniec. Chyba nie było to zbyt trudne? W praktyce wystarczyło dobrze przemyśleć wszystkie kroki algorytmu, żeby znaleźć możliwie najprostsze rozwiązanie. Oczywiście łatwo jest powiedzieć, trudniej zrobić. Zapewniam, że opracowanie tej koncepcji zajęło mi znacznie dłużej, niż trwało napisanie tego artykułu. Sama implementacja również nie byłaby zbyt długa, jeśli nie liczyć frustrującej i mozolnej diagnozy błędów. Podczas pisania programu niestety popełniłem dwie banalne pomyłki, których wykrycie wymagało wielokrotnie „ręcznego” przejścia przez kilkadziesiąt iteracji algorytmu, co zajęło z przerwami kilka dni. Ostatecznie jednak cała gra nadal jest bardzo prosta, do czego nawiązuje tytuł całego cyklu: [Napiszmy prostą grę planszową...](https://github.com/jarfos/ChessMemory)
